@@ -1,0 +1,8 @@
+Hi Mandeep,
+
+Please confirm your account by clicking on the link below:
+http://www.fitgalaxyy.com/users/2/confirm/eyJpdiI6InVnRUl6MDZsYnB6RzE0MnZSZnBtTEE9PSIsInZhbHVlIjoiU1o2NytzMXpNdjBZYXdQY1kweE56SE1IakRUSTJhd1J3aHlDcWpIZEEyTT0iLCJtYWMiOiIzZmNhOGVmN2YxZjkzNmY2YmJmYTAwYjM1ZmM0MTkzMjEzMGE2OGIxNzhiNmM2Nzk3MDQ3NGE5YjlkOTdlZTcwIn0=
+
+
+Regards,
+FitGalaxyy Team

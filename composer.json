@@ -1,0 +1,51 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.2.*",
+        "dingo/api": "1.0.x@dev",
+        "tymon/jwt-auth": "0.5.*",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
+    },
+    "require-dev": {
+        "itsgoingd/clockwork": "~1.9"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "GistApi\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "pre-update-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-update-cmd": [
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
