@@ -161,7 +161,7 @@ return [
          */
         GistApi\Providers\DevelopmentServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
-
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
     ],
 
     /*
@@ -207,9 +207,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
-            'Api'       => Dingo\Api\Facade\API::class,
-            'ApiRoute'  => Dingo\Api\Facade\Route::class,
+        'Api'       => Dingo\Api\Facade\API::class,
+        'ApiRoute'  => Dingo\Api\Facade\Route::class,
+        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
     ],
 
 ];
