@@ -9,8 +9,7 @@
         "laravel/framework": "5.2.*",
         "dingo/api": "1.0.x@dev",
         "tymon/jwt-auth": "0.5.*",
-        "guzzlehttp/guzzle": "~5.3|~6.0",
-        "jenssegers/mongodb": "^2.3"
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "itsgoingd/clockwork": "~1.9"

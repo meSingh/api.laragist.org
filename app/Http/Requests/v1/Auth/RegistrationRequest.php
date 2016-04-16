@@ -20,7 +20,6 @@ class RegistrationRequest extends ApiRequest
             'last_name'     => 'required',
             'email'         => 'required|email|unique:users',
             'password'      => 'required|min:6',
-            'location'      => 'required',
         ];
     }
 

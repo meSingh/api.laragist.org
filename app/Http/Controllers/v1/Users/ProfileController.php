@@ -48,18 +48,4 @@ class ProfileController extends ApiController
         return $this->response->noContent();
     }
 
-
-    /**
-     * Store additional information to newly confirmed user instance
-     *
-     * @param  \GistApi\Http\Requests\v1\Users\RegistrationStep2Request  $request
-     * @param  integer  $id
-     * @return 
-     */
-    protected function registrationStep2(RegistrationStep2Request $request, $id)
-    {
-        $user = User::whereId($id)->update( $request->all() );
-
-        return $this->response->noContent();
-    }
 }

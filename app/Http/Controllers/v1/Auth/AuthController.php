@@ -42,8 +42,9 @@ class AuthController extends ApiController
             'last_name'  => $request->last_name,
             'email'      => $request->email,
             'password'   => bcrypt( $request->password ),
-            'terms'      => true
         ]);
+        
+       
 
         // Create random username for start 
         // in FIRSTNAME_LASTNAME_USERID format.
