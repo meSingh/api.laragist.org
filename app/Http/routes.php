@@ -63,6 +63,11 @@ ApiRoute::version('v1', [
         });
 
 
+        // Confirm user account email link
+        ApiRoute::post('submit', 'PackageController@store');
+        ApiRoute::post('search', 'PackageController@search');
+
+
 }); // Version-1 group
 
 
