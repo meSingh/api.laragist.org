@@ -103,8 +103,15 @@ class PackageController extends ApiController
 
             return $return;
         });
-        $version = $versionIds->first();
-        $latest = $versions->all()[$version];
+        if( $versionIds->count() )
+        {
+            $version = $versionIds->first();
+            $latest = $versions->all()[$version];
+        }
+        else
+        {
+            $latest = $versions->first();   
+        }
 
         // Add data to db
         $package = Package::create([
