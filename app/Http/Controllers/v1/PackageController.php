@@ -25,9 +25,14 @@ use GistApi\Http\Controllers\v1\ApiController;
 
 class PackageController extends ApiController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
+        if( $request->has('q') )
+            $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
+                            ->where('name','LIKE', '%' . $request->get('q') . '%')
+                            ->whereStatus(1)->paginate(20);
+        else
+            $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
                             ->whereStatus(1)->paginate(20);
 
         return $this->response->paginator($packages, new PackagesTransformer);
