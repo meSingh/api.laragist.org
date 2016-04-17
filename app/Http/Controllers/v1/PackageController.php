@@ -19,11 +19,20 @@ use GuzzleHttp\Client;
 use GistApi\Repositories\Author;
 use GistApi\Repositories\Package;
 use GistApi\Repositories\PackageRepo;
+use GistApi\Transformers\PackagesTransformer;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
 class PackageController extends ApiController
 {
+    public function index()
+    {
+        $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
+                            ->whereStatus(1)->paginate(20);
+
+        return $this->response->paginator($packages, new PackagesTransformer);
+
+    }
  
     /**
      * Store Package data
