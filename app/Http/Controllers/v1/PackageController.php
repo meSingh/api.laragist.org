@@ -111,6 +111,7 @@ class PackageController extends ApiController
         else
         {
             $latest = $versions->first();   
+            $version = $latest->version;
         }
 
         // Add data to db
