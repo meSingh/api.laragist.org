@@ -4,14 +4,14 @@ namespace GistApi\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Package extends Model
+class Category extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'packages';
+    protected $table = 'categories';
 
     /**
      * The attributes that are mass assignable.
@@ -41,14 +41,5 @@ class Package extends Model
      */
     protected $appends = [];
 
-    public function authors()
-    {
-        return $this->belongsToMany('GistApi\Repositories\Author', 'package_authors', 'package_id', 'author_id');
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany('GistApi\Repositories\Category', 'package_categories', 'package_id', 'category_id');
-    }
 
 }

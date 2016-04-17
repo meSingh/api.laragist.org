@@ -22,9 +22,9 @@ class CreatePackagesTableOnMongo extends Migration
     public function up()
     {
         Schema::connection('mongodb')->create('packages', function ($collection) {
-            $collection->index('name');
 
-            $collection->unique('name');
+
+
         });
     }
 

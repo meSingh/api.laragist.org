@@ -42,6 +42,7 @@ class PackageController extends ApiController
         $user->first_name = $request->first_name;
         $user->save();
 
+
         // Check if package already exists in db
         $check = Package::whereName( $request->name )->first();
         if(!is_null($check))
@@ -125,6 +126,9 @@ class PackageController extends ApiController
             $authors[] = $authorRepo->id;
         }
         $package->authors()->attach($authors);
+        
+        // Attach categories
+        $package->categories()->attach( [ $request->category_id ] );
 
         // Insert versions data to mongo
         $repo = PackageRepo::create( [ 'versions' => $versions->values()->all()] );
