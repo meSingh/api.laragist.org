@@ -14,7 +14,7 @@ use GistApi\Repositories\User;
 use GistApi\Mailers\UserMailer;
 
 use Illuminate\Http\Request;
-
+use GistApi\Http\Requests\v1\Package\StoreRequest;
 use GuzzleHttp\Client;
 use GistApi\Repositories\Author;
 use GistApi\Repositories\Package;
@@ -45,7 +45,7 @@ class PackageController extends ApiController
      * @param \Illuminate\Http\Request $request
      * @return null or error
      */
-    protected function store(Request $request)
+    protected function store(StoreRequest $request)
     {
          // $client = new Client(['debug'=>true]);
         $client = new Client();
