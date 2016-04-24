@@ -30,10 +30,14 @@ class PackageController extends ApiController
         if( $request->has('q') )
             $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
                             ->where('name','LIKE', '%' . $request->get('q') . '%')
-                            ->whereStatus(1)->paginate(20);
+                            ->whereStatus(1)
+                            ->with('categories')
+                            ->paginate(20);
         else
             $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
-                            ->whereStatus(1)->paginate(20);
+                            ->whereStatus(1)
+                            ->with('categories')
+                            ->paginate(20);
 
         return $this->response->paginator($packages, new PackagesTransformer);
 
@@ -176,7 +180,7 @@ class PackageController extends ApiController
 
     public function show( $user, $name)
     {
-        $package = Package::whereName($user . '/' . $name)->first();
+        $package = Package::whereName($user . '/' . $name)->with('categories')->first();
 
         if(is_null($package)) return $this->response->errorBadRequest('Package does not exists!');
 
