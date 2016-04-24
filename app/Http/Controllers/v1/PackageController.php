@@ -134,10 +134,17 @@ class PackageController extends ApiController
         $authors = [];
         foreach ($latest->authors as $author) 
         {
-            $authorRepo = Author::firstOrNew([
-                'email' =>  $author->email
-            ]);
-
+            if( isset($author->email) )
+            {
+                $authorRepo = Author::firstOrNew([
+                    'email' =>  $author->email
+                ]);
+            }
+            else
+            {
+                $authorRepo = new Author;
+            }
+            
             $authorRepo->name = $author->name;
             $authorRepo->homepage = isset( $author->homepage ) ? $author->homepage : "";
             $authorRepo->role = isset( $author->role ) ? $author->role : "";
