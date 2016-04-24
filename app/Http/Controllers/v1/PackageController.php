@@ -167,10 +167,22 @@ class PackageController extends ApiController
         return $this->response->noContent();
     }
 
-    public function search(Request $request)
+    public function show( $user, $name)
     {
-        $package =  PackageRepo::find('57127c3f9a892009c3200d24');
-        return $package->versions;
+        $package = Package::whereName($user . '/' . $name)->first();
+
+        if(is_null($package)) return $this->response->errorBadRequest('Package does not exists!');
+
+        $packageRepo = PackageRepo::find($package->object_id);
+        if(!is_null($packageRepo))
+        {
+            $package->versions = $packageRepo->versions;
+            $package->latest = collect($packageRepo->versions)
+                                    ->where('version', $package->version)
+                                    ->first();
+        }
+        
+        return $package;
     }
 
 }
