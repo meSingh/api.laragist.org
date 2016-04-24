@@ -41,6 +41,11 @@ class Package extends Model
      */
     protected $appends = [];
 
+    public function getLastUpdatedAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['last_updated'])->toDateTimeString();
+    }
+
     public function authors()
     {
         return $this->belongsToMany('GistApi\Repositories\Author', 'package_authors', 'package_id', 'author_id');
