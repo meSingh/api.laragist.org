@@ -28,13 +28,13 @@ class PackageController extends ApiController
     public function index(Request $request)
     {
         if( $request->has('q') )
-            $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
+            $packages = Package::select(['id','name','description','downloads_total','favorites'])
                             ->where('name','LIKE', '%' . $request->get('q') . '%')
                             ->whereStatus(1)
                             ->with('categories')
                             ->paginate(20);
         else
-            $packages = Package::select([ 'name', 'description', 'downloads_total', 'favorites' ])
+            $packages = Package::select(['id','name','description','downloads_total','favorites'])
                             ->whereStatus(1)
                             ->with('categories')
                             ->paginate(20);
