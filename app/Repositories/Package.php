@@ -43,7 +43,7 @@ class Package extends Model
 
     public function getLastUpdatedAttribute()
     {
-        return \Carbon\Carbon::parse($this->attributes['last_updated'])->toDateTimeString();
+        return \Carbon\Carbon::parse($this->attributes['last_updated'])->format('d M, Y');
     }
 
     public function authors()
