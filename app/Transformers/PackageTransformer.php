@@ -17,7 +17,7 @@ class PackageTransformer extends TransformerAbstract
     {
     	return [
     		'package' => [
-    			'name' 				=> $package->name,
+    			'name' 				=> $package->package->name,
     			'description'		=> $package->package->description,
     			'keywords'			=> $package->package->keywords,
     			'license'			=> $package->package->license,
