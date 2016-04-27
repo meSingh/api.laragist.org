@@ -194,6 +194,7 @@ class PackageController extends ApiController
                                     ->first();
         }
         
+        
         return $this->response->item($package, new PackageTransformer);
     }
 
