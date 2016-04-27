@@ -192,6 +192,7 @@ class PackageController extends ApiController
         return [
             'data' => $package
         ];
+        
         // return $this->item($package, new PackageTransformer);
     }
 
