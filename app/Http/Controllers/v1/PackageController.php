@@ -189,7 +189,10 @@ class PackageController extends ApiController
                                     ->where('version', $package->version)
                                     ->first();
         }
-        return $this->item($package, new PackageTransformer);
+        return [
+            'data' => $package
+        ];
+        // return $this->item($package, new PackageTransformer);
     }
 
 }
