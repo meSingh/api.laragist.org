@@ -16,7 +16,8 @@ class CategoryController extends ApiController
     public function index()
     {
         $categories = Category::with('packageCategories')
-                        ->groupBy('categories.name');
+                        ->groupBy('categories.name')
+                        ->get();
 
         $categories = $categories->map(function($item){
 
