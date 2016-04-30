@@ -14,6 +14,7 @@ class CategoryController extends ApiController
     public function index()
     {
         return Category::with('packageCategories')
+                        ->select( DB::raw('categories.name as name, categories.slug as slug, count(package_categories.id) as total') )
                         ->groupBy('categories.name')
                         ->get();
     }
