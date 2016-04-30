@@ -17,7 +17,7 @@ class CategoriesTransformer extends TransformerAbstract
     {
     	return [
     		'name' 		=> $category->name,
-    		'slug' 		=> $category->slug
+    		'id' 		=> $category->id
     	];
     }
 
