@@ -41,5 +41,14 @@ class Category extends Model
      */
     protected $appends = [];
 
+    /**
+    * Get the packages for a category
+    */
+   
+    public function packages()
+    {
+        return $this->hasMany('GistApi\Repositories\Package');
+    }
+
 
 }

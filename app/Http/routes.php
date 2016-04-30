@@ -68,6 +68,9 @@ ApiRoute::version('v1', [
         ApiRoute::get('packages/{user}/{name}', 'PackageController@show');
         ApiRoute::post('submit', 'PackageController@store');
 
+        //Categories Routes
+        ApiRoute::get('categories','CategoryController@index');
+
 
 }); // Version-1 group
 
