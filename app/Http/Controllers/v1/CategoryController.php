@@ -8,15 +8,24 @@ use GistApi\Repositories\Category;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
+use GistApi\Transformers\CategoriesTransformer;
+
 class CategoryController extends ApiController
 {
 
     public function index()
     {
-        return Category::with('packageCategories')
-                        ->select( \DB::raw('categories.name as name, categories.slug as slug, package_categories.package_id as pid, count(pid) as total') )
+        $categories = Category::with('packageCategories')
                         ->groupBy('categories.name')
                         ->get();
+
+        $categories = $categories->map(function($item){
+            $item->package_categories = $item->package_categories->count();
+            return $item;
+        });
+
+        return $this->response->collection($categories, new CategoriesTransformer);
+
     }
 
 }
