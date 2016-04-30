@@ -16,14 +16,13 @@ class CategoryController extends ApiController
     public function index()
     {
         $categories = Category::with('packageCategories')
-                        ->groupBy('categories.name')
-                        ->get();
+                        ->groupBy('categories.name');
 
         return $categories;
-        
+
         $categories = $categories->map(function($item){
 
-            if(! $item->package_categories->isEmpty() )
+            if(! is_null($item->package_categories) )
                 $item->package_categories = $item->package_categories->count();
             
             return $item;
