@@ -13,7 +13,7 @@ class CategoryController extends ApiController
 
     public function index()
     {
-        return Category::with('packages')
+        return Category::with('packageCategories')
                         ->groupBy('categories.name')
                         ->get();
     }
