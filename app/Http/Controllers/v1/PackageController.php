@@ -170,7 +170,7 @@ class PackageController extends ApiController
         $package->keywords = implode(',', $latest->keywords);
         $package->license = implode(',', $latest->license);
         $package->version = $version;
-        $package->homepage = $latest->homepage;
+        $package->homepage = empty( $latest->homepage ) ? $data->repository : $latest->homepage;
         $package->last_updated = $latest->time;
         $package->object_id = $repo->_id;
         $package->save();
