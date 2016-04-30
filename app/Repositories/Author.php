@@ -39,7 +39,11 @@ class Author extends Model
      *
      * @var array
      */
-    protected $appends = [];
+    protected $appends = ['email_hash'];
 
+    public function getEmailHashAttribute()
+    {
+        return md5( strtolower( trim( $this->attributes['email']) ) );
+    }
 
 }

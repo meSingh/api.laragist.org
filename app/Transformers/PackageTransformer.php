@@ -39,7 +39,8 @@ class PackageTransformer extends TransformerAbstract
 				'status' 			=> $package->status,
 				'versions'			=> $package->versions,
 				'latest'			=> $package->latest,
-				'categories'		=> $package->categories
+                'categories'        => $package->categories
+				'authors'		    => $package->authors
     		]
     	];
     }
