@@ -15,8 +15,7 @@ class CategoryController extends ApiController
     {
         return Category::with('packages')
                         ->groupBy('categories.name')
-                        ->count()
-                        ->get();
+                        ->count();
     }
 
 }
