@@ -20,7 +20,10 @@ class CategoryController extends ApiController
                         ->get();
 
         $categories = $categories->map(function($item){
-            $item->package_categories = $item->package_categories->count();
+
+            if(! $item->package_categories->isEmpty() )
+                $item->package_categories = $item->package_categories->count();
+            
             return $item;
         });
 
