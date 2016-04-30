@@ -13,7 +13,7 @@ class CategoryController extends ApiController
 
     public function index()
     {
-        return Category::withPackages()
+        return Category::with('packages')
                         ->select( 
                             DB::raw("SELECT categories.name as name, slug, categories.id, count(packages.id) as total")
                             )
