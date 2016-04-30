@@ -18,12 +18,12 @@ class CategoryController extends ApiController
         $categories = Category::with('packageCategories')
                         ->groupBy('categories.name');
 
-        dd($categories);
-
         $categories = $categories->map(function($item){
 
             if(! is_null($item->package_categories) )
                 $item->package_categories = $item->package_categories->count();
+            else
+                $item->package_categories = 0;
             
             return $item;
         });
