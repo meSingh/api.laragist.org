@@ -66,7 +66,13 @@ ApiRoute::version('v1', [
         // Confirm user account email link
         ApiRoute::get('/', 'PackageController@index');
         ApiRoute::post('submit', 'PackageController@store');
-        ApiRoute::post('packages/{user}/{name}', 'PackageController@show');
+
+        
+        ApiRoute::get('packages/{user}/{name}', 'PackageController@show');
+        
+
+        //Categories Routes
+        ApiRoute::get('categories','CategoryController@index');
 
 
 }); // Version-1 group

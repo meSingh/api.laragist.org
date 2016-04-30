@@ -2,16 +2,22 @@
 
 namespace GistApi\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Category extends Model
+class PackageCategories extends \Moloquent
 {
+
+    /**
+     * The name of the database connection to use.
+     *
+     * @var string
+     */
+    protected $connection = 'mongodb';
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'categories';
+    protected $collection = 'package_categories';
 
     /**
      * The attributes that are mass assignable.
@@ -40,15 +46,5 @@ class Category extends Model
      * @var array
      */
     protected $appends = [];
-
-    /**
-    * Get the packages for a category
-    */
-   
-    public function packageCategories()
-    {
-        return $this->hasMany('GistApi\Repositories\PackageCategories');
-    }
-
 
 }

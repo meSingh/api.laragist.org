@@ -20,6 +20,7 @@ use GistApi\Repositories\Author;
 use GistApi\Repositories\Package;
 use GistApi\Repositories\PackageRepo;
 use GistApi\Transformers\PackagesTransformer;
+use GistApi\Transformers\PackageTransformer;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
@@ -193,7 +194,8 @@ class PackageController extends ApiController
                                     ->first();
         }
         
-        return $package;
+        
+        return $this->response->item($package, new PackageTransformer);
     }
 
 }
