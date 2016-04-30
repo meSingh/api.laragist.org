@@ -45,9 +45,9 @@ class Category extends Model
     * Get the packages for a category
     */
    
-    public function packageCategories()
+    public function categories()
     {
-        return $this->hasMany('GistApi\Repositories\PackageCategories');
+        return $this->belongsToMany('GistApi\Repositories\Package', 'package_categories', 'category_id', 'package_id');
     }
 
 
