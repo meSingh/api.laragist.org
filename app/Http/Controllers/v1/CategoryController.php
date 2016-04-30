@@ -19,6 +19,8 @@ class CategoryController extends ApiController
                         ->groupBy('categories.name')
                         ->get();
 
+        return $categories;
+        
         $categories = $categories->map(function($item){
 
             if(! $item->package_categories->isEmpty() )
