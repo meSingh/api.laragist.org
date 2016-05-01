@@ -24,6 +24,8 @@ use GistApi\Transformers\PackageTransformer;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
+use GistApi\Events\PackageSubmitted;
+
 class PackageController extends ApiController
 {
     public function index(Request $request)
@@ -175,6 +177,9 @@ class PackageController extends ApiController
         $package->last_updated = $latest->time;
         $package->object_id = $repo->_id;
         $package->save();
+
+        event(new PackageSubmitted($package));
+
 
         return $this->response->noContent();
     }

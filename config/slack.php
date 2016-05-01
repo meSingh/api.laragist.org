@@ -13,7 +13,7 @@ return [
   |
   */
 
-  'endpoint' => '',
+  'endpoint' => 'https://hooks.slack.com/services/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',
 
   /*
   |-------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
   |
   */
 
-  'channel' => '#general',
+  'channel' => '#laragist_org',
 
   /*
   |-------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
   |
   */
 
-  'username' => 'Robot',
+  'username' => 'Laragist',
 
   /*
   |-------------------------------------------------------------
