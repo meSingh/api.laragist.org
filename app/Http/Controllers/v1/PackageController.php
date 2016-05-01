@@ -178,6 +178,7 @@ class PackageController extends ApiController
         $package->object_id = $repo->_id;
         $package->save();
 
+        event(new PackageSubmitted($package));
 
 
         return $this->response->noContent();
@@ -198,7 +199,6 @@ class PackageController extends ApiController
                                     ->first();
         }
         
-        event(new PackageSubmitted($package));
         
         return $this->response->item($package, new PackageTransformer);
     }
