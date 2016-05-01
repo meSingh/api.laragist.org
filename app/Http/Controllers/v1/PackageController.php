@@ -24,6 +24,8 @@ use GistApi\Transformers\PackageTransformer;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
+use GistApi\Events\PackageSubmitted;
+
 class PackageController extends ApiController
 {
     public function index(Request $request)
@@ -176,6 +178,8 @@ class PackageController extends ApiController
         $package->object_id = $repo->_id;
         $package->save();
 
+
+
         return $this->response->noContent();
     }
 
@@ -194,6 +198,7 @@ class PackageController extends ApiController
                                     ->first();
         }
         
+        event(new PackageSubmitted($package));
         
         return $this->response->item($package, new PackageTransformer);
     }
