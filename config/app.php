@@ -163,6 +163,7 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Maknz\Slack\SlackServiceProviderLaravel5::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
 
     ],
 
