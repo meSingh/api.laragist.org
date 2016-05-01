@@ -162,6 +162,8 @@ return [
         GistApi\Providers\DevelopmentServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Maknz\Slack\SlackServiceProviderLaravel5::class,
+
     ],
 
     /*
@@ -210,6 +212,7 @@ return [
         'Api'       => Dingo\Api\Facade\API::class,
         'ApiRoute'  => Dingo\Api\Facade\Route::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Slack'     => Maknz\Slack\Facades\Slack::class,
     ],
 
 ];
