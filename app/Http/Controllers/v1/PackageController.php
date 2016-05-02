@@ -178,7 +178,7 @@ class PackageController extends ApiController
         $package->object_id = $repo->_id;
         $package->save();
 
-        event(new PackageSubmitted($package));
+        event(new PackageSubmitted($package->id));
 
 
         return $this->response->noContent();
