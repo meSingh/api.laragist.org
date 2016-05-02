@@ -177,8 +177,8 @@ class PackageController extends ApiController
         $package->last_updated = $latest->time;
         $package->object_id = $repo->_id;
         $package->save();
-
-        event(new PackageSubmitted($package->id));
+        
+        \Slack::send("New Package Submitted \n ".$package->name);
 
 
         return $this->response->noContent();
