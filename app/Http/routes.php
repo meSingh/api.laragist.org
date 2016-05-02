@@ -74,6 +74,8 @@ ApiRoute::version('v1', [
         //Categories Routes
         ApiRoute::get('categories','CategoryController@index');
 
+        //Add Subscriber
+        ApiRoute::post('subscribers','SubscriberController@store');
 
 }); // Version-1 group
 
