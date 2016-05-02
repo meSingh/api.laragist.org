@@ -19,7 +19,7 @@ class PackageSubmitted extends Event
      *
      * @return void
      */
-    public function __construct(Package $package)
+    public function __construct( $package)
     {
         $this->package = $package;
     }
