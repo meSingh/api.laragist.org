@@ -31,13 +31,13 @@ class PackageController extends ApiController
     public function index(Request $request)
     {
         $packages = Package::select([
-                            'id',
-                            'name',
-                            'description',
-                            'downloads_total',
-                            'favorites',
-                            'version', 
-                            'last_updated'
+                            'packages.id as id',
+                            'packages.name as name',
+                            'packages.description as description',
+                            'packages.downloads_total as downloads_total',
+                            'packages.favorites as favorites',
+                            'packages.version as version', 
+                            'packages.last_updated as last_updated'
                         ])
                         ->with('categories')
                         ->whereStatus(1)
@@ -45,28 +45,32 @@ class PackageController extends ApiController
 
 
         if( $request->has('q') && !empty($request->get('q')) )
-            $packages = $packages->where('name','LIKE', '%' . $request->get('q') . '%');
+            $packages = $packages->where('packages.name','LIKE', 
+                                            '%' . $request->get('q') . '%');
 
         if( $request->has('sortby') && !empty($request->get('sortby')) )
         {
             switch ($request->get('sortby')) 
             {
                 case 'mp':
-                    $packages = $packages->orderBy('favorites');
+                    $packages = $packages->orderBy('packages.favorites', 'DESC');
                     break;
 
                 case 'md':
-                    $packages = $packages->orderBy('downloads_total');
+                    $packages = $packages->orderBy('packages.downloads_total', 'DESC');
                     break;
 
                 case 'ru':
-                    $packages = $packages->orderBy('last_updated');
+                    $packages = $packages->orderBy('packages.last_updated', 'DESC');
                     break;
             }
         }
 
         if( $request->has('cid') && !empty($request->get('cid')) )
-            $packages = $packages->where('category_id', $request->get('cid'));
+            $packages = $packages
+                            ->join('package_categories', 
+                                    'package_categories.package_id', '=', 'packages.id')
+                            ->where('package_categories.category_id',$request->get('cid'));
             
                             
         $packages = $packages->paginate(20);             
