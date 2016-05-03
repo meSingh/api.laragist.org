@@ -30,17 +30,46 @@ class PackageController extends ApiController
 {
     public function index(Request $request)
     {
-        if( $request->has('q') )
-            $packages = Package::select(['id','name','description','downloads_total','favorites','version', 'last_updated'])
-                            ->where('name','LIKE', '%' . $request->get('q') . '%')
-                            ->whereStatus(1)
-                            ->with('categories')
-                            ->paginate(20);
-        else
-            $packages = Package::select(['id','name','description','downloads_total','favorites','version', 'last_updated'])
-                            ->whereStatus(1)
-                            ->with('categories')
-                            ->paginate(20);
+        $packages = Package::select([
+                            'id',
+                            'name',
+                            'description',
+                            'downloads_total',
+                            'favorites',
+                            'version', 
+                            'last_updated'
+                        ])
+                        ->with('categories')
+                        ->whereStatus(1)
+                            ;
+
+
+        if( $request->has('q') && !empty($request->get('q')) )
+            $packages = $packages->where('name','LIKE', '%' . $request->get('q') . '%');
+
+        if( $request->has('sortby') && !empty($request->get('sortby')) )
+        {
+            switch ($request->get('sortby')) 
+            {
+                case 'mp':
+                    $packages = $packages->orderBy('favorites');
+                    break;
+
+                case 'md':
+                    $packages = $packages->orderBy('downloads_total');
+                    break;
+
+                case 'ru':
+                    $packages = $packages->orderBy('last_updated');
+                    break;
+            }
+        }
+
+        if( $request->has('cid') && !empty($request->get('cid')) )
+            $packages = $packages->where('category_id', $request->get('cid'));
+            
+                            
+        $packages = $packages->paginate(20);             
 
         return $this->response->paginator($packages, new PackagesTransformer);
 
@@ -177,7 +206,7 @@ class PackageController extends ApiController
         $package->last_updated = $latest->time;
         $package->object_id = $repo->_id;
         $package->save();
-        
+
         \Slack::send("New Package Submitted \n ".$package->name);
 
 
