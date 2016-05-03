@@ -40,8 +40,7 @@ class PackageController extends ApiController
                             'packages.last_updated as last_updated'
                         ])
                         ->with('categories')
-                        ->whereStatus(1)
-                            ;
+                        ->where('packages.status', 1);
 
 
         if( $request->has('q') && !empty($request->get('q')) )
@@ -234,6 +233,24 @@ class PackageController extends ApiController
         
         
         return $this->response->item($package, new PackageTransformer);
+    }
+
+    public function underReview()
+    {
+        $packages = Package::select([
+                            'packages.id as id',
+                            'packages.name as name',
+                            'packages.description as description',
+                            'packages.downloads_total as downloads_total',
+                            'packages.favorites as favorites',
+                            'users.first_name as user',
+                            // \DB::raw('CONCAT(users.first_name, " ", if(users.last_name is null ,"", users.last_name)) as user'),
+                        ])
+                        ->join('users', 'users.id', '=', 'packages.user_id')
+                        ->where('packages.status', 0)
+                        ->paginate(20);             
+
+        return $this->response->paginator($packages, new PackagesTransformer);
     }
 
 }

@@ -65,6 +65,7 @@ ApiRoute::version('v1', [
 
         // Confirm user account email link
         ApiRoute::get('/', 'PackageController@index');
+        ApiRoute::get('under-review', 'PackageController@underReview');
         ApiRoute::post('submit', 'PackageController@store');
 
         
