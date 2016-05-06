@@ -17,7 +17,7 @@ class SubscriberController extends ApiController
 
         Newsletter::subscribe($request->email, $data);
 
-        if(Newsletter::lastActionSucceed())
+        if(Newsletter::lastActionSucceeded())
             return $this->response->noContent();
         else
             return $this->response->errorBadRequest(Newsletter::getLastError());
