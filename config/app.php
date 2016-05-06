@@ -214,6 +214,7 @@ return [
         'ApiRoute'  => Dingo\Api\Facade\Route::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class
     ],
 
 ];
