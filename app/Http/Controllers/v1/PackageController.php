@@ -72,7 +72,7 @@ class PackageController extends ApiController
                             ->where('package_categories.category_id',$request->get('cid'));
             
                             
-        $packages = $packages->paginate(2);             
+        $packages = $packages->paginate(20);             
 
         return $this->response->paginator($packages, new PackagesTransformer);
 
