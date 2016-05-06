@@ -4,7 +4,7 @@ namespace GistApi\Http\Controllers\v1;
 
 use Illuminate\Http\Request;
 use Newsletter;
-use GistApi\Requests\v1\Subscriber\StoreRequest;
+use GistApi\Http\Requests\v1\Subscriber\StoreRequest;
 use GistApi\Http\Controllers\v1\ApiController;
 
 class SubscriberController extends ApiController
