@@ -13,7 +13,7 @@ return [
   |
   */
 
-  'endpoint' => 'https://hooks.slack.com/services/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',
+  'endpoint' => env('SLACK_URL', ' default'),
 
   /*
   |-------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
   |
   */
 
-  'channel' => '#laragist_org',
+  'channel' => '#submissions',
 
   /*
   |-------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
   |
   */
 
-  'username' => 'Laragist',
+  'username' => 'Laraphant',
 
   /*
   |-------------------------------------------------------------

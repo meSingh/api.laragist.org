@@ -34,14 +34,14 @@ abstract class AppMailer
      *
      * @var string
      */
-    protected $from = 'hello@fitgalaxyy.com';
+    protected $from = 'hello@laragist.com';
 
     /**
      * The default sender's name.
      *
      * @var string
      */
-    protected $fromName = 'FitGalaxyy';
+    protected $fromName = 'LaraGist';
 
     /**
      * The recipient of the email.

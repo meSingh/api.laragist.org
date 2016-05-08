@@ -210,7 +210,7 @@ class PackageController extends ApiController
         $package->object_id = $repo->_id;
         $package->save();
 
-        \Slack::send("New Package Submitted \n ".$package->name);
+        \Slack::send("New Package Submitted: \n ".$package->name .'\n by ' . $user->first_name);
 
 
         return $this->response->noContent();

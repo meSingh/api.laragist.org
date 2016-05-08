@@ -89,11 +89,8 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', 27017),
-            // 'database' => env('DB_DATABASE', 'laragist'),
-            'database' => 'laragist',
-            // 'username' => env('DB_USERNAME', 'forge'),
+            'database' => env('MONGODB_NAME', ''),
             'username' => '',
-            // 'password' => env('DB_PASSWORD', 'forge'),
             'password' => '',
             'options' => [
                 // 'db' => 'admin' // sets the authentication database required by mongo 3

@@ -35,7 +35,7 @@ class UserMailer extends AppMailer
 
     public function confirmation(User $user)
     {
-        $this->subject = "Confirm your account at FitGalaxyy";
+        $this->subject = "Confirm your account at LaraGist";
         $this->view = $this->baseView . 'confirmation';
         $this->to = $user->email;
         $this->toName = $user->name;

@@ -157,7 +157,7 @@ return [
         GistApi\Providers\RouteServiceProvider::class,
 
         /*
-         * GalaxyyApi Service Providers...
+         * Laragist Service Providers...
          */
         GistApi\Providers\DevelopmentServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,

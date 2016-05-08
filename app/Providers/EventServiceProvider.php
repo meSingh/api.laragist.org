@@ -16,9 +16,6 @@ class EventServiceProvider extends ServiceProvider
         'GistApi\Events\SomeEvent' => [
             'GistApi\Listeners\EventListener',
         ],
-        'GistApi\Events\PackageSubmiited' => [
-            'GistApi\Listeners\PushSlackNotification'
-        ],
     ];
 
     /**
