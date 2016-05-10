@@ -196,7 +196,7 @@ class PackageController extends ApiController
         $package->authors()->attach($authors);
         
         // Attach categories
-        $package->categories()->attach( json_decode($request->category_id) );
+        $package->categories()->attach( $request->category_id );
 
         // Insert versions data to mongo
         $repo = PackageRepo::create( [ 'versions' => $versions->values()->all()] );
