@@ -11,11 +11,11 @@ class SubscriberController extends ApiController
 {
     public function store(StoreRequest $request){
 
-        $data = [
-            'firstName' => $request->firstName
-        ];
+        // $data = [
+        //     'firstName' => $request->firstName
+        // ];
 
-        Newsletter::subscribe($request->email, $data);
+        Newsletter::subscribe($request->email);
 
         if(Newsletter::lastActionSucceeded())
             return $this->response->noContent();

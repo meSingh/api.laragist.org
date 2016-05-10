@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug');
 
-            $table->tinyInteger('status')->default('0');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }
