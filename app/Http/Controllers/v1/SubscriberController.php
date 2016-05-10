@@ -9,13 +9,9 @@ use GistApi\Http\Controllers\v1\ApiController;
 
 class SubscriberController extends ApiController
 {
-    public function store(StoreRequest $request){
+    public function store(Request $request){
 
-        $data = [
-            'firstName' => $request->firstName
-        ];
-
-        Newsletter::subscribe($request->email, $data);
+        Newsletter::subscribe($request->email);
 
         if(Newsletter::lastActionSucceeded())
             return $this->response->noContent();
