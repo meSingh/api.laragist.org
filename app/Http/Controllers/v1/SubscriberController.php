@@ -19,8 +19,12 @@ class SubscriberController extends ApiController
 
         if(Newsletter::lastActionSucceeded())
             return $this->response->noContent();
-        else
-            return $this->response->errorBadRequest(Newsletter::getLastError());
+        
+        $result = Newsletter::getLastError();
+        $code = substr($result, 0, 3);
+
+        if($code == 400)
+            return $this->response->errorBadRequest('You have already subscribed!');
 
     }
 }
