@@ -117,10 +117,7 @@ class Kernel extends ConsoleKernel
                 $package->authors()->attach($authors);
 
                 // Insert versions data to mongo
-                $packageRepo = PackageRepo::find($package->object_id);
-
-                $packageRepo->versions = $versions->values()->all();
-                $packageRepo->save();
+                $packageRepo = PackageRepo::find($package->object_id)->update([ 'versions' => $versions->values()->all()]);
 
                 // Update various other data
                 $package->keywords = implode(',', $latest->keywords);
