@@ -42,6 +42,7 @@ class Kernel extends ConsoleKernel
 
             foreach ($packages as $package) 
             {
+                \Log::info('Fetching data for ' . $package->name);
                 try{
                     // Make the request to get package content
                     $response = $client->request('GET', "https://packagist.org/packages/" . $package->name . ".json");
@@ -121,7 +122,7 @@ class Kernel extends ConsoleKernel
                                 ->update([ 
                                     'versions' => $versions->values()->map(
                                         function ($package) {
-                                            $pacakge['extra']['branch-alias'] = [];
+                                            $pacakge->extra = [];
                                             return $package;
                                         })->all()]);
 
