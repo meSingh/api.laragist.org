@@ -121,7 +121,7 @@ class Kernel extends ConsoleKernel
                                 ->update([ 
                                     'versions' => $versions->values()->map(
                                         function ($package) {
-                                            $pacakge->extra->branch-alias = [];
+                                            $pacakge['extra']['branch-alias'] = [];
                                             return $package;
                                         })->all()]);
 
@@ -136,6 +136,9 @@ class Kernel extends ConsoleKernel
             }
 
 
-        })->hourly();
+        })->when(function () {
+            return true;
+        });
+        // })->hourly();
     }
 }

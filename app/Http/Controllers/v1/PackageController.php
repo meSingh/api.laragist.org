@@ -202,7 +202,7 @@ class PackageController extends ApiController
         $repo = PackageRepo::create( [ 
                 'versions' => $versions->values()->map(
                 function ($package) {
-                    $pacakge->extra->branch-alias = [];
+                    $pacakge['extra']['branch-alias'] = [];
                     return $package;
                 })->all()] );
 
