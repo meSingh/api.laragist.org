@@ -199,7 +199,12 @@ class PackageController extends ApiController
         $package->categories()->attach( $request->category_id );
 
         // Insert versions data to mongo
-        $repo = PackageRepo::create( [ 'versions' => $versions->values()->all()] );
+        $repo = PackageRepo::create( [ 
+                'versions' => $versions->values()->map(
+                function ($package) {
+                    $pacakge->extra->branch-alias = [];
+                    return $package;
+                })->all()] );
 
         // Update various other data
         $package->keywords = implode(',', $latest->keywords);
