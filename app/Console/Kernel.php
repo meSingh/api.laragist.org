@@ -7,9 +7,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 use GistApi\Repositories\Package;
 use GistApi\Repositories\PackageRepo;
+use GistApi\Repositories\PackageVersion;
 use GistApi\Repositories\Author;
 use GistApi\Repositories\Category;
-
+use URL;
 use GuzzleHttp\Client;
 
 
@@ -36,7 +37,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         //          
             
-        $schedule->call(function () {
+        $schedule->call(function ()
+        {
             $client = new Client();
             $packages = Package::where('status', 1)->get();
 
@@ -117,14 +119,16 @@ class Kernel extends ConsoleKernel
                 }
                 $package->authors()->attach($authors);
 
-                // Insert versions data to mongo
-                $packageRepo = PackageRepo::find($package->object_id)
-                                ->update([ 
-                                    'versions' => $versions->values()->map(
-                                        function ($package) {
-                                            $pacakge->extra = [];
-                                            return $package;
-                                        })->all()]);
+                foreach ($versions as $versionData) 
+                {
+                    $insert = PackageVersion::firstOrNew([
+                        'package_id' => $package->id,
+                        'version'   => $versionData->version,
+                    ]);
+
+                    $insert->data = collect($versionData)->toJson();
+                    $insert->save();
+                }
 
                 // Update various other data
                 $package->keywords = implode(',', $latest->keywords);
@@ -137,9 +141,42 @@ class Kernel extends ConsoleKernel
             }
 
 
-        })->when(function () {
-            return true;
-        });
-        // })->hourly();
+        // })->when(function () {
+        //     return true;
+        // });
+        })->hourly();
+
+
+
+
+
+        $schedule->call(function () 
+        {
+
+            // create new sitemap object
+            $sitemap = \App::make("sitemap");
+
+            // add items to the sitemap (url, date, priority, freq)
+            $sitemap->add(  URL::to('/'),         \Carbon\Carbon::now(), '1.0', 'daily');
+            $sitemap->add(  URL::to('submit'),    \Carbon\Carbon::now(), '0.8', 'daily');
+            $sitemap->add(  URL::to('about'),     \Carbon\Carbon::now(), '0.5', 'weekly');
+            $sitemap->add(  URL::to('support'),   \Carbon\Carbon::now(), '0.5', 'weekly');
+            // get all posts from db
+            $packages = \DB::table('packages')->orderBy('created_at', 'desc')->get();
+
+            // add every post to the sitemap
+            foreach ($packages as $package)
+            {
+                $sitemap->add(URL::to('package/' . $package->name), $package->updated_at, '0.9', 'daily');
+            }
+
+            // generate your sitemap (format, filename)
+            $sitemap->store('xml', 'sitemap');
+            // this will generate file sitemap.xml to your public folder
+
+//         })->when(function () {
+//             return true;
+//         });
+        })->daily();
     }
 }

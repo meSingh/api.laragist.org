@@ -2,22 +2,16 @@
 
 namespace GistApi\Repositories;
 
-class PackageRepo extends \Moloquent
+use Illuminate\Database\Eloquent\Model;
+
+class PackageVersion extends Model
 {
-
-    /**
-     * The name of the database connection to use.
-     *
-     * @var string
-     */
-    protected $connection = 'mongodb';
-
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $collection = 'packages';
+    protected $table = 'package_versions';
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +40,11 @@ class PackageRepo extends \Moloquent
      * @var array
      */
     protected $appends = [];
+
+    public function getLastUpdatedAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['last_updated'])->format('d M, Y');
+    }
+
 
 }

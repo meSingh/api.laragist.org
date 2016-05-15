@@ -10,9 +10,9 @@
         "dingo/api": "1.0.x@dev",
         "tymon/jwt-auth": "0.5.*",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "jenssegers/mongodb": "^3.0",
         "maknz/slack": "^1.7",
-        "spatie/laravel-newsletter": "^3.0"
+        "spatie/laravel-newsletter": "^3.0",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "itsgoingd/clockwork": "~1.9"

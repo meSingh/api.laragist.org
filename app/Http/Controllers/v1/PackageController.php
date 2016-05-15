@@ -19,6 +19,7 @@ use GuzzleHttp\Client;
 use GistApi\Repositories\Author;
 use GistApi\Repositories\Package;
 use GistApi\Repositories\PackageRepo;
+use GistApi\Repositories\PackageVersion;
 use GistApi\Transformers\PackagesTransformer;
 use GistApi\Transformers\PackageTransformer;
 
@@ -198,13 +199,16 @@ class PackageController extends ApiController
         // Attach categories
         $package->categories()->attach( $request->category_id );
 
-        // Insert versions data to mongo
-        $repo = PackageRepo::create( [ 
-                'versions' => $versions->values()->map(
-                function ($package) {
-                    $pacakge['extra']['branch-alias'] = [];
-                    return $package;
-                })->all()] );
+        foreach ($versions as $versionData) 
+        {
+            $insert = PackageVersion::firstOrNew([
+                'package_id' => $package->id,
+                'version'   => $versionData->version,
+            ]);
+
+            $insert->data = collect($versionData)->toJson();
+            $insert->save();
+        }
 
         // Update various other data
         $package->keywords = implode(',', $latest->keywords);
@@ -212,7 +216,6 @@ class PackageController extends ApiController
         $package->version = $version;
         $package->homepage = empty( $latest->homepage ) ? $data->repository : $latest->homepage;
         $package->last_updated = $latest->time;
-        $package->object_id = $repo->_id;
         $package->save();
 
         \Slack::send("New Package Submitted: \n ".$package->name . "\n by " . $user->first_name);
@@ -227,15 +230,15 @@ class PackageController extends ApiController
 
         if(is_null($package)) return $this->response->errorBadRequest('Package does not exists!');
 
-        $packageRepo = PackageRepo::find($package->object_id);
-        if(!is_null($packageRepo))
+        $versionsData = PackageVersion::where('package_id', $package->id)->get();
+        $package->versions = $versionsData->map(function($version)
         {
-            $package->versions = $packageRepo->versions;
-            $package->latest = collect($packageRepo->versions)
-                                    ->where('version', $package->version)
-                                    ->first();
-        }
+            return json_decode($version->data);
+        });
+
         
+        $package->latest = json_decode($versionsData->where('version', $package->version)->first()->data);
+
         
         return $this->response->item($package, new PackageTransformer);
     }

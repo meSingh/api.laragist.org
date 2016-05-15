@@ -161,9 +161,9 @@ return [
          */
         GistApi\Providers\DevelopmentServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        Jenssegers\Mongodb\MongodbServiceProvider::class,
         Maknz\Slack\SlackServiceProviderLaravel5::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
     ],
 
@@ -212,7 +212,6 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Api'       => Dingo\Api\Facade\API::class,
         'ApiRoute'  => Dingo\Api\Facade\Route::class,
-        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class
     ],

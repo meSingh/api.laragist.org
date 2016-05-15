@@ -35,7 +35,6 @@ class CreatePackagesTable extends Migration
             $table->integer('downloads_daily')->unsigned();
             $table->integer('favorites')->unsigned();
             
-            $table->string('object_id')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
 
             $table->text('created')->nullable();
