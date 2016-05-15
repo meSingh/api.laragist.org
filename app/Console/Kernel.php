@@ -117,7 +117,7 @@ class Kernel extends ConsoleKernel
 
                     $authors[] = $authorRepo->id;
                 }
-                $package->authors()->attach($authors);
+                $package->authors()->sync($authors);
 
                 foreach ($versions as $versionData) 
                 {
