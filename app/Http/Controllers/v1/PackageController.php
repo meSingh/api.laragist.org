@@ -19,6 +19,7 @@ use GuzzleHttp\Client;
 use GistApi\Repositories\Author;
 use GistApi\Repositories\Package;
 use GistApi\Repositories\PackageRepo;
+use GistApi\Repositories\Category;
 use GistApi\Repositories\PackageVersion;
 use GistApi\Transformers\PackagesTransformer;
 use GistApi\Transformers\PackageTransformer;
