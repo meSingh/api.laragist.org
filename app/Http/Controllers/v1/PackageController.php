@@ -22,6 +22,7 @@ use GistApi\Repositories\PackageRepo;
 use GistApi\Repositories\PackageVersion;
 use GistApi\Transformers\PackagesTransformer;
 use GistApi\Transformers\PackageTransformer;
+use GistApi\Transformers\CategoriesTransformer;
 
 use GistApi\Http\Controllers\v1\ApiController;
 
@@ -78,7 +79,14 @@ class PackageController extends ApiController
         return $this->response->paginator($packages, new PackagesTransformer);
 
     }
- 
+
+    public function create()
+    {
+        $categories = Category::whereStatus(1)->groupBy('name')->get();
+
+        return $this->response->collection($categories, new CategoriesTransformer);
+    }
+
     /**
      * Store Package data
      *

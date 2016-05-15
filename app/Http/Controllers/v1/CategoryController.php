@@ -15,7 +15,7 @@ class CategoryController extends ApiController
 
     public function index()
     {
-        $categories = Category::groupBy('name')->get();
+        $categories = Category::whereStatus(1)->whereVisible(1)->groupBy('name')->get();
 
         return $this->response->collection($categories, new CategoriesTransformer);
 

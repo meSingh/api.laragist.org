@@ -67,8 +67,9 @@ ApiRoute::version('v1', [
         ApiRoute::get('/', 'PackageController@index');
         ApiRoute::get('under-review', 'PackageController@underReview');
         ApiRoute::post('submit', 'PackageController@store');
+        ApiRoute::get('categories/all', 'PackageController@create');
 
-        
+
         ApiRoute::get('packages/{user}/{name}', 'PackageController@show');
         
 
